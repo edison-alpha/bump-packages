@@ -4,3 +4,4 @@ export * from "./orders.ts";
 export * from "./errors.ts";
 export * from "./fills.ts";
 export * from "./reader.ts";
+export * from "./prices.ts";

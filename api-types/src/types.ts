@@ -149,3 +149,27 @@ export type PushSubscribeRequest = { endpoint: string; keys: { p256dh: string; a
 
 /** The payload the service worker receives. */
 export type PushMessage = { title: string; body: string; url: string; tag: string };
+
+/** GET /api/prices. Testnet exchange marks, never example prices or last-fill substitutes. */
+export type MarketPricesResponse = {
+  source: "dreamdex";
+  chainId: number;
+  generatedAt: number;
+  prices: {
+    id: string;
+    symbol: string;
+    price: number | null;
+    status: "live" | "stale" | "unavailable";
+    updatedAt: number | null;
+    /** Approximate rolling 24h change from the hourly trade candle containing the 24h-ago instant. */
+    change24h: number | null;
+  }[];
+};
+
+/** GET /api/markets/:id/candles?bucket=60&limit=60. Actual trade candles, sorted with gaps intact. */
+export type MarketCandlesResponse = {
+  source: "dreamdex";
+  marketId: string;
+  bucket: number;
+  samples: { at: number; price: number }[];
+};
