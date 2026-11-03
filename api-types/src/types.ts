@@ -24,6 +24,8 @@ export type SessionUser = {
   tutorialDone: boolean;
   /** True once guest data was imported (or there was none to import); the app stops offering it. */
   guestImported: boolean;
+  /** The dreamDEX smart account this player trades through; null when they trade with the sign-in wallet itself. */
+  tradingAccount: string | null;
 };
 
 export type SessionResponse = { user: SessionUser | null };
@@ -35,6 +37,12 @@ export type ProfileRequest = { name: string; username: string; showOnLeaderboard
 
 /** POST /api/me/prefs. `tzOffsetMin` is `new Date().getTimezoneOffset()`, so missions reset at the player's midnight. */
 export type PrefsRequest = { tzOffsetMin?: number; tutorialDone?: boolean; showOnLeaderboard?: boolean };
+
+/**
+ * POST /api/me/account. Links a dreamDEX smart account: the sign-in wallet must be one of its owners and the account must
+ * need a single signature (threshold 1), otherwise 400. `account: null` goes back to trading with the sign-in wallet.
+ */
+export type TradingAccountRequest = { account: string | null };
 
 /** POST /api/me/import: a guest's local closed trades. Accepted once; they count for XP, never for the leaderboard. */
 export type GuestImportRequest = {
