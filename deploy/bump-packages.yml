@@ -1,0 +1,13 @@
+---
+# Run from Semaphore UI (template "Deploy Bump Packages"). Pulls bump-packages on the VPS, installs dependencies,
+# restarts bump-backend.service (it loads the packages at start), and waits for /api/health.
+- name: Deploy bump-packages
+  hosts: vps
+  gather_facts: false
+  tasks:
+    - name: Run deploy-remote.sh on the VPS
+      ansible.builtin.script: "{{ playbook_dir }}/../scripts/deploy-remote.sh"
+      register: deploy
+    - name: Show deploy output
+      ansible.builtin.debug:
+        var: deploy.stdout_lines

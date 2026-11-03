@@ -25,3 +25,7 @@ bun run types:export   # copy api-types into ../bump/lib/api/types.ts
 - TP and SL go out as one linked pair (`placePerpStopOrder` with `pair`): one transaction, one-cancels-other, 2× the
   SOMI/STT trigger payment. Both legs use quantity 0 = "the whole position when it fires".
 - Price math runs on raw bigints, so `0.52 × 0.995` is exactly `0.5174` and never `0.51739999…`.
+
+## Deploy
+
+Semaphore templates and CI for these packages: see `deploy/bump-packages.yml` and `.semaphore/`. Full setup steps are in bump-backend's `deploy/SEMAPHORE.md`. A deploy pulls the packages on the VPS and restarts bump-backend, which loads them at start.
