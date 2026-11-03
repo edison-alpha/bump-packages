@@ -1,0 +1,17 @@
+{
+  "name": "@bump/dreamdex",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@bump/shared": "workspace:*",
+    "@somnia-chain/markets-sdk": "0.32.1",
+    "viem": "2.56.7"
+  },
+  "devDependencies": {
+    "@bump/testkit": "workspace:*"
+  }
+}
